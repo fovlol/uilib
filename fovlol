@@ -24,59 +24,55 @@ function Library:Create(table)
 
     local main = Instance.new("Frame")
     main.Name = "main"
-    main.BackgroundColor3 = Color3.fromRGB(28, 28, 28)
-    main.Position = UDim2.fromScale(0.35, 0.3)
-    main.Size = UDim2.fromOffset(600, 340)
+    main.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+    main.Position = UDim2.new(0.244, 0, 0.292, 0)
+    main.Size = UDim2.new(0, 488, 0, 299)
     main.Parent = dark_UI
+    main.AnchorPoint = Vector2.new(0.5, 0.5)
+    main.Position = UDim2.new(0.5, 0, 0.5, 0)
 
     local uICorner = Instance.new("UICorner")
+    uICorner.Name = "uICorner"
     uICorner.CornerRadius = UDim.new(0, 8)
     uICorner.Parent = main
 
-    local accentBar = Instance.new("Frame")
-    accentBar.Name = "AccentBar"
-    accentBar.BackgroundColor3 = Color3.fromRGB(44, 203, 67) -- Green
-    accentBar.Size = UDim2.new(1, 0, 0, 4)
-    accentBar.Position = UDim2.new(0, 0, 0, 0)
-    accentBar.Parent = main
-
     local sidebar = Instance.new("Frame")
     sidebar.Name = "Sidebar"
-    sidebar.BackgroundColor3 = Color3.fromRGB(33, 33, 33)
-    sidebar.Size = UDim2.fromOffset(160, 336)
-    sidebar.Position = UDim2.fromOffset(0, 4)
+    sidebar.BackgroundColor3 = Color3.fromRGB(28, 28, 28)
+    sidebar.Size = UDim2.new(0, 150, 1, 0)
+    sidebar.Position = UDim2.new(0, 0, 0, 0)
     sidebar.Parent = main
 
     local sidebarCorner = Instance.new("UICorner")
+    sidebarCorner.Name = "SidebarCorner"
     sidebarCorner.CornerRadius = UDim.new(0, 8)
     sidebarCorner.Parent = sidebar
 
-    -- Example Sidebar Buttons
-    local sections = {"HOW TO USE", "MISC", "CREDITS"}
-    for i, section in ipairs(sections) do
-        local btn = Instance.new("TextButton")
-        btn.Text = section
-        btn.Font = Enum.Font.Gotham
-        btn.TextColor3 = Color3.fromRGB(168, 168, 168)
-        btn.TextSize = 16
-        btn.BackgroundColor3 = Color3.fromRGB(33, 33, 33)
-        btn.Size = UDim2.fromOffset(140, 32)
-        btn.Position = UDim2.fromOffset(10, 20 + (i-1)*38)
-        btn.Parent = sidebar
-        btn.AutoButtonColor = true
-    end
-
     local content = Instance.new("Frame")
     content.Name = "Content"
-    content.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
-    content.Position = UDim2.fromOffset(170, 12)
-    content.Size = UDim2.fromOffset(420, 316)
+    content.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+    content.Size = UDim2.new(1, -150, 1, 0)
+    content.Position = UDim2.new(0, 150, 0, 0)
     content.Parent = main
 
     local contentCorner = Instance.new("UICorner")
+    contentCorner.Name = "ContentCorner"
     contentCorner.CornerRadius = UDim.new(0, 8)
     contentCorner.Parent = content
-    
+
+    -- Example Sidebar Button
+    local mainButton = Instance.new("TextButton")
+    mainButton.Name = "MainButton"
+    mainButton.Font = Enum.Font.Gotham
+    mainButton.Text = "Main"
+    mainButton.TextColor3 = Color3.fromRGB(195, 195, 195)
+    mainButton.TextSize = 14
+    mainButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+    mainButton.Size = UDim2.new(1, 0, 0, 30)
+    mainButton.Position = UDim2.new(0, 0, 0.15, 0)
+    mainButton.Parent = sidebar
+    mainButton.AutoButtonColor = false
+
     local title = Instance.new("TextLabel")
     title.Name = "title"
     title.Font = Enum.Font.Gotham
@@ -85,16 +81,77 @@ function Library:Create(table)
     title.TextSize = 20
     title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     title.BackgroundTransparency = 1
-    title.Position = UDim2.fromScale(0.05, 0.0543) -- Moves the title further left
-    title.Size = UDim2.fromOffset(150, 28) -- Adjust width if needed
-    title.TextXAlignment = Enum.TextXAlignment.Left -- Aligns text within the label
-    title.Parent = content
+    title.Position = UDim2.new(0.05, 0, 0.0543, 0)
+    title.Size = UDim2.new(0, 150, 0, 28)
+    title.TextXAlignment = Enum.TextXAlignment.Left
+    title.Parent = main
+
+    -- Close ("X") Button
+    local closeButton = Instance.new("TextButton")
+    closeButton.Name = "CloseButton"
+    closeButton.Text = "X"
+    closeButton.Font = Enum.Font.Gotham
+    closeButton.TextColor3 = Color3.fromRGB(200, 80, 80)
+    closeButton.TextSize = 18
+    closeButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+    closeButton.Position = UDim2.new(1, -30, 0, 5)
+    closeButton.Size = UDim2.new(0, 25, 0, 25)
+    closeButton.Parent = main
+
+    -- Minimize Button
+    local minimizeButton = Instance.new("TextButton")
+    minimizeButton.Name = "MinimizeButton"
+    minimizeButton.Text = "_"
+    minimizeButton.Font = Enum.Font.Gotham
+    minimizeButton.TextColor3 = Color3.fromRGB(200, 200, 200)
+    minimizeButton.TextSize = 18
+    minimizeButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+    minimizeButton.Position = UDim2.new(1, -55, 0, 5)
+    minimizeButton.Size = UDim2.new(0, 25, 0, 25)
+    minimizeButton.Parent = main
+
+    --Top Image (replace with your image id)
+    local image = Instance.new("ImageLabel")
+    image.Name = "Image"
+    image.Size = UDim2.new(0, 120, 0, 100)
+    image.Position = UDim2.new(0.5, 0, 0.02, 0)
+    image.AnchorPoint = Vector2.new(0.5, 0)
+    image.BackgroundTransparency = 1
+    image.Image = "rbxassetid://14461838004"
+    image.Parent = sidebar
+
+    -- Close button functionality
+    closeButton.MouseButton1Click:Connect(function()
+        dark_UI:Destroy()
+    end)
+
+    -- Minimize button functionality
+    local minimized = false
+    local originalSize = main.Size
+
+    minimizeButton.MouseButton1Click:Connect(function()
+        if not minimized then
+            main.Size = UDim2.fromOffset(200, 40)
+            -- Optionally hide tabContainer and other elements
+            sidebar.Visible = false
+            content.Visible = false
+            minimizeButton.Text = "▢"
+            minimized = true
+        else
+            main.Size = originalSize
+            sidebar.Visible = true
+            content.Visible = true
+            minimizeButton.Text = "_"
+            minimized = false
+        end
+    end)
 
     local tabContainer = Instance.new("Frame")
     tabContainer.Name = "tabContainer"
-    tabContainer.BackgroundColor3 = Color3.fromRGB(33, 33, 33)
-    tabContainer.Position = UDim2.fromScale(0.0342, 0.188)
-    tabContainer.Size = UDim2.fromOffset(454, 30)
+    tabContainer.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+    tabContainer.Position = UDim2.new(0.0342, 0, 0.31, 0)
+    tabContainer.Size = UDim2.new(0, 400, 0, 30)
+    tabContainer.Parent = content
 
     local uICorner1 = Instance.new("UICorner")
     uICorner1.Name = "uICorner1"
@@ -114,30 +171,6 @@ function Library:Create(table)
     uIPadding.PaddingTop = UDim.new(0, 4)
     uIPadding.Parent = tabContainer
 
-    local shadow = Instance.new("ImageLabel")
-    shadow.Name = "shadow"
-    shadow.Image = "rbxassetid://297774371"
-    shadow.ImageColor3 = Color3.fromRGB(15, 15, 15)
-    shadow.ImageTransparency = 0.3
-    shadow.SliceCenter = Rect.new(20, 20, 280, 280)
-    shadow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    shadow.BackgroundTransparency = 1
-    shadow.Position = UDim2.fromScale(0.224, 0.272)
-    shadow.Selectable = true
-    shadow.Size = UDim2.fromOffset(529, 331)
-    shadow.ZIndex = -1
-
-    shadow.Parent = dark_UI
-
-    tabContainer.Parent = content
-    content.Parent = main
-    main.Parent = dark_UI
-    main.AnchorPoint = Vector2.new(0.5,0.5)
-    shadow.AnchorPoint = Vector2.new(0.5,0.5)
-
-    main.Position = UDim2.new(0.5,0,0.5,0)
-    shadow.Position = UDim2.new(0.5,0,0.5,0)
-
     local tabHandler = {}
 
     function tabHandler:Exit()
@@ -156,21 +189,22 @@ function Library:Create(table)
         main1.AutomaticSize = Enum.AutomaticSize.X
         main1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         main1.BackgroundTransparency = 1
-        main1.Size = UDim2.fromOffset(10, 24)
+        main1.Size = UDim2.new(0, 10, 0, 24)
         main1.Parent = tabContainer
 
         --// Creating the container
         local container = Instance.new("Frame")
         container.Name = "container"
         container.BackgroundColor3 = Color3.fromRGB(33, 33, 33)
-        container.Position = UDim2.fromScale(0.0342, 0.31)
-        container.Size = UDim2.fromOffset(454, 183)
-        
+        container.Position = UDim2.new(0.0342, 0, 0.45, 0)
+        container.Size = UDim2.new(0, 400, 0, 183)
+        container.AnchorPoint = Vector2.new(0, 0)
+
         local uICorner2 = Instance.new("UICorner")
         uICorner2.Name = "uICorner2"
         uICorner2.CornerRadius = UDim.new(0, 6)
         uICorner2.Parent = container
-        
+
         local holder = Instance.new("ScrollingFrame")
         holder.Name = "holder"
         holder.ScrollBarImageColor3 = Color3.fromRGB(76, 76, 76)
@@ -180,8 +214,8 @@ function Library:Create(table)
         holder.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         holder.BackgroundTransparency = 1
         holder.BorderColor3 = Color3.fromRGB(33, 33, 33)
-        holder.Position = UDim2.fromScale(0.0022, 0.00404)
-        holder.Size = UDim2.fromOffset(452, 182)
+        holder.Position = UDim2.new(0.0022, 0, 0.00404, 0)
+        holder.Size = UDim2.new(0, 398, 0, 182)
 
         local uIPadding1 = Instance.new("UIPadding")
         uIPadding1.Name = "uIPadding1"
@@ -211,6 +245,11 @@ function Library:Create(table)
                     v.Visible = false
                 end
             end
+            for _,v in pairs(game.CoreGui['dark_UI'].main.content:GetChildren()) do
+                if v:IsA('Frame') and v.Name == "container" then
+                    v.Visible = false
+                end
+            end
             for _,v in pairs(game.CoreGui['dark_UI'].main.tabContainer:GetChildren()) do
                 if v:IsA('TextButton') then
                     game:GetService('TweenService'):Create(v, TweenInfo.new(0.3), {TextTransparency = 0.5}):Play()
@@ -226,9 +265,9 @@ function Library:Create(table)
             local label = Instance.new("Frame")
             label.Name = "label"
             label.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
-            label.Size = UDim2.fromOffset(441, 32)
+            label.Size = UDim2.new(0, 385, 0, 32)
             label.Parent = holder
-    
+
             local uICorner3 = Instance.new("UICorner")
             uICorner3.Name = "uICorner3"
             uICorner3.CornerRadius = UDim.new(0, 6)
@@ -244,8 +283,8 @@ function Library:Create(table)
             textLabel.TextXAlignment = Enum.TextXAlignment.Left
             textLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
             textLabel.BackgroundTransparency = 1
-            textLabel.Position = UDim2.fromScale(0.0181, 0)
-            textLabel.Size = UDim2.fromOffset(1, 32)
+            textLabel.Position = UDim2.new(0.0181, 0, 0, 0)
+            textLabel.Size = UDim2.new(1, 0, 1, 0)
             textLabel.Parent = label
         end
 
@@ -255,9 +294,9 @@ function Library:Create(table)
 
             local button = Instance.new("TextButton")
             button.Name = "button"
-            button.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
-            button.Position = UDim2.fromScale(0, 0.135)
-            button.Size = UDim2.fromOffset(441, 32)
+            button.BackgroundColor3 = Color3.fromRGB(245, 90, 0)
+            button.Position = UDim2.new(0, 0, 0.135, 0)
+            button.Size = UDim2.new(0, 385, 0, 32)
             button.Text = ""
             button.AutoButtonColor = false
 
@@ -270,34 +309,24 @@ function Library:Create(table)
             textLabel5.Name = "textLabel5"
             textLabel5.Font = Enum.Font.Gotham
             textLabel5.Text = text
-            textLabel5.TextColor3 = Color3.fromRGB(195, 195, 195)
+            textLabel5.TextColor3 = Color3.fromRGB(255, 255, 255)
             textLabel5.TextSize = 13
             textLabel5.TextStrokeColor3 = Color3.fromRGB(195, 195, 195)
             textLabel5.TextXAlignment = Enum.TextXAlignment.Left
             textLabel5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
             textLabel5.BackgroundTransparency = 1
-            textLabel5.Position = UDim2.fromScale(0.0181, 0)
-            textLabel5.Size = UDim2.fromOffset(1, 32)
+            textLabel5.Position = UDim2.new(0.0181, 0, 0, 0)
+            textLabel5.Size = UDim2.new(1, 0, 1, 0)
             textLabel5.Parent = button
-
-            local imageLabel = Instance.new("ImageLabel")
-            imageLabel.Name = "imageLabel"
-            imageLabel.Image = "http://www.roblox.com/asset/?id=9584292194"
-            imageLabel.ImageColor3 = Color3.fromRGB(195, 195, 195)
-            imageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            imageLabel.BackgroundTransparency = 1
-            imageLabel.Position = UDim2.fromScale(0.943, 0.219)
-            imageLabel.Size = UDim2.fromOffset(18, 18)
-            imageLabel.Parent = button
 
             button.Parent = holder
 
             button.MouseEnter:Connect(function()
-                game:GetService('TweenService'):Create(button, TweenInfo.new(0.3), {BackgroundColor3 = Color3.fromRGB(43,43,43)}):Play()
+                game:GetService('TweenService'):Create(button, TweenInfo.new(0.3), {BackgroundColor3 = Color3.fromRGB(200, 70, 0)}):Play()
             end)
 
             button.MouseLeave:Connect(function()
-                game:GetService('TweenService'):Create(button, TweenInfo.new(0.3), {BackgroundColor3 = Color3.fromRGB(38,38,38)}):Play()
+                game:GetService('TweenService'):Create(button, TweenInfo.new(0.3), {BackgroundColor3 = Color3.fromRGB(245, 90, 0)}):Play()
             end)
 
             button.MouseButton1Click:Connect(function()
@@ -312,7 +341,7 @@ function Library:Create(table)
             local slider = Instance.new("TextButton")
             slider.Name = "slider"
             slider.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
-            slider.Size = UDim2.fromOffset(441, 32)
+            slider.Size = UDim2.new(0, 385, 0, 32)
             slider.Text = ""
             slider.AutoButtonColor = false
 
@@ -331,15 +360,15 @@ function Library:Create(table)
             textLabel1.TextXAlignment = Enum.TextXAlignment.Left
             textLabel1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
             textLabel1.BackgroundTransparency = 1
-            textLabel1.Position = UDim2.fromScale(0.0181, 0)
-            textLabel1.Size = UDim2.fromOffset(1, 32)
+            textLabel1.Position = UDim2.new(0.0181, 0, 0, 0)
+            textLabel1.Size = UDim2.new(1, 0, 1, 0)
             textLabel1.Parent = slider
 
             local frame = Instance.new("Frame")
             frame.Name = "frame"
             frame.BackgroundColor3 = Color3.fromRGB(33, 33, 33)
-            frame.Position = UDim2.fromScale(0.753, 0.375)
-            frame.Size = UDim2.fromOffset(102, 8)
+            frame.Position = UDim2.new(0.753, 0, 0.375, 0)
+            frame.Size = UDim2.new(0, 102, 0, 8)
 
             local uICorner5 = Instance.new("UICorner")
             uICorner5.Name = "uICorner5"
@@ -349,8 +378,8 @@ function Library:Create(table)
             local frame1 = Instance.new("Frame")
             frame1.Name = "frame1"
             frame1.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
-            frame1.Position = UDim2.fromScale(-0.00207, 0)
-            frame1.Size = UDim2.fromOffset(44, 8)
+            frame1.Position = UDim2.new(-0.00207, 0, 0, 0)
+            frame1.Size = UDim2.new(0, 44, 0, 8)
 
             local uICorner6 = Instance.new("UICorner")
             uICorner6.Name = "uICorner6"
@@ -370,8 +399,8 @@ function Library:Create(table)
             textLabel2.TextStrokeColor3 = Color3.fromRGB(195, 195, 195)
             textLabel2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
             textLabel2.BackgroundTransparency = 1
-            textLabel2.Position = UDim2.fromScale(0.653, 0)
-            textLabel2.Size = UDim2.fromOffset(44, 32)
+            textLabel2.Position = UDim2.new(0.653, 0, 0, 0)
+            textLabel2.Size = UDim2.new(0, 44, 0, 32)
             textLabel2.Parent = slider
 
             slider.Parent = holder
@@ -406,7 +435,7 @@ function Library:Create(table)
                     local value = ((max - min) * percentage) + min
                     value = math.floor(value)
                     textLabel2.Text = value
-                    local tween = game:GetService('TweenService'):Create(frame1, TweenInfo.new(0.06), {Size = UDim2.fromScale(percentage, 1)}):Play()
+                    local tween = game:GetService('TweenService'):Create(frame1, TweenInfo.new(0.06), {Size = UDim2.new(percentage, 0, 1, 0)}):Play()
                     callback(value)
                 end
             end)
@@ -419,7 +448,7 @@ function Library:Create(table)
             local toggle1 = Instance.new("TextButton")
             toggle1.Name = "toggle1"
             toggle1.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
-            toggle1.Size = UDim2.fromOffset(441, 32)
+            toggle1.Size = UDim2.new(0, 385, 0, 32)
             toggle1.Text = ""
             toggle1.AutoButtonColor = false
 
@@ -438,15 +467,15 @@ function Library:Create(table)
             textLabel4.TextXAlignment = Enum.TextXAlignment.Left
             textLabel4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
             textLabel4.BackgroundTransparency = 1
-            textLabel4.Position = UDim2.fromScale(0.0181, 0)
-            textLabel4.Size = UDim2.fromOffset(1, 32)
+            textLabel4.Position = UDim2.new(0.0181, 0, 0, 0)
+            textLabel4.Size = UDim2.new(1, 0, 1, 0)
             textLabel4.Parent = toggle1
 
             local frame3 = Instance.new("Frame")
             frame3.Name = "frame3"
             frame3.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
-            frame3.Position = UDim2.fromScale(0.873, 0.219)
-            frame3.Size = UDim2.fromOffset(18, 18)
+            frame3.Position = UDim2.new(0.873, 0, 0.219, 0)
+            frame3.Size = UDim2.new(0, 18, 0, 18)
 
             local uICorner7 = Instance.new("UICorner")
             uICorner7.Name = "uICorner7"
@@ -459,7 +488,7 @@ function Library:Create(table)
 
             toggle1.MouseButton1Click:Connect(function()
                 if not toggled then
-                    game:GetService('TweenService'):Create(frame3, TweenInfo.new(0.3), {BackgroundColor3 = Color3.fromRGB(44, 203, 67)}):Play()
+                    game:GetService('TweenService'):Create(frame3, TweenInfo.new(0.3), {BackgroundColor3 = Color3.fromRGB(245, 90, 0)}):Play()
                     toggled = true
                     callback(true)
                 else
@@ -474,74 +503,29 @@ function Library:Create(table)
 
         return ElementHandler
     end
-    
-    local icon = Instance.new("ImageLabel")
-    icon.Image = "rbxassetid://YOUR_ICON_ASSET_ID"
-    icon.Size = UDim2.fromOffset(36, 36)
-    icon.Position = UDim2.fromOffset(12, 10)
-    icon.BackgroundTransparency = 1
-    icon.Parent = sidebar
+    local imageLabel = Instance.new("ImageLabel")
+    imageLabel.Name = "imageLabel"
+    imageLabel.Image = "rbxassetid://14461838004"
+    imageLabel.ImageColor3 = Color3.fromRGB(195, 195, 195)
+    imageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    imageLabel.BackgroundTransparency = 1
+    imageLabel.Position = UDim2.new(0.063, 0, 0.1, 0)
+    imageLabel.Size = UDim2.new(0, 120, 0, 100)
+    imageLabel.Parent = sidebar
 
-    local title = Instance.new("TextLabel")
-    title.Text = "NBT HUB\nTHREE PIECE"
-    title.Font = Enum.Font.GothamBold
-    title.TextColor3 = Color3.fromRGB(168, 168, 168)
-    title.TextSize = 16
-    title.Position = UDim2.fromOffset(56, 14)
-    title.Size = UDim2.fromOffset(90, 36)
-    title.BackgroundTransparency = 1
-    title.TextXAlignment = Enum.TextXAlignment.Left
-    title.TextYAlignment = Enum.TextYAlignment.Top
-    title.Parent = sidebar
-
-    -- Close ("X") Button
-    local closeButton = Instance.new("TextButton")
-    closeButton.Name = "CloseButton"
-    closeButton.Text = "X"
-    closeButton.Font = Enum.Font.Gotham
-    closeButton.TextColor3 = Color3.fromRGB(200, 80, 80)
-    closeButton.TextSize = 18
-    closeButton.BackgroundColor3 = Color3.fromRGB(33, 33, 33)
-    closeButton.Position = UDim2.new(1, -34, 0, 8) -- Top right corner
-    closeButton.Size = UDim2.fromOffset(26, 26)
-    closeButton.Parent = main
-
-    -- Minimize Button
-    local minimizeButton = Instance.new("TextButton")
-    minimizeButton.Name = "MinimizeButton"
-    minimizeButton.Text = "_"
-    minimizeButton.Font = Enum.Font.Gotham
-    minimizeButton.TextColor3 = Color3.fromRGB(200, 200, 200)
-    minimizeButton.TextSize = 18
-    minimizeButton.BackgroundColor3 = Color3.fromRGB(33, 33, 33)
-    minimizeButton.Position = UDim2.new(1, -68, 0, 8) -- Next to close button
-    minimizeButton.Size = UDim2.fromOffset(26, 26)
-    minimizeButton.Parent = main
-    
-    -- Close button functionality
-    closeButton.MouseButton1Click:Connect(function()
-        dark_UI:Destroy()
-    end)
-
-    -- Minimize button functionality
-    local minimized = false
-    local originalSize = main.Size
-
-    minimizeButton.MouseButton1Click:Connect(function()
-        if not minimized then
-            main.Size = UDim2.fromOffset(200, 40) -- Adjust to your preference
-            -- Optionally hide tabContainer and other elements
-            tabContainer.Visible = false
-            minimizeButton.Text = "▢"
-            minimized = true
-        else
-            main.Size = originalSize
-            tabContainer.Visible = true
-            minimizeButton.Text = "_"
-            minimized = false
-        end
-    end)
-
+    local nameLabel = Instance.new("TextLabel")
+    nameLabel.Name = "nameLabel"
+    nameLabel.Font = Enum.Font.Gotham
+    nameLabel.Text = "FOX HUB"
+    nameLabel.TextColor3 = Color3.fromRGB(195, 195, 195)
+    nameLabel.TextSize = 20
+    nameLabel.TextXAlignment = Enum.TextXAlignment.Center
+    nameLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    nameLabel.BackgroundTransparency = 1
+    nameLabel.Position = UDim2.new(0.063, 0, 0.43, 0)
+    nameLabel.Size = UDim2.new(0, 120, 0, 30)
+    nameLabel.Parent = sidebar
+    nameLabel.TextXAlignment = Enum.TextXAlignment.Center
     return tabHandler
 end
 
